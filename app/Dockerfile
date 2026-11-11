@@ -1,8 +1,8 @@
 # llm-wiki-v2 (crow-hq/llm-wiki-v2, AGPL-3.0) on Railway. FROM the upstream image built unmodified from tag v1.0.0
 # (see .github/workflows/publish-ghcr.yml), plus Caddy basic auth in front: the upstream server has no authentication.
+ARG BASE=ghcr.io/onepush-dev/llm-wiki-v2-base:1.0.0
 FROM caddy:2.10-alpine AS caddy
 
-ARG BASE=ghcr.io/onepush-dev/llm-wiki-v2-base:1.0.0
 FROM ${BASE}
 LABEL org.opencontainers.image.source="https://github.com/onepush-dev/llm-wiki-v2" \
       org.opencontainers.image.licenses="AGPL-3.0-or-later"
