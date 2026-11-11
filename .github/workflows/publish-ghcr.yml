@@ -1,0 +1,42 @@
+name: Publish GHCR
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["app/**", ".github/workflows/publish-ghcr.yml"]
+permissions:
+  contents: read
+  packages: write
+env:
+  UPSTREAM_REF: v1.0.0
+  TAG: 1.0.0
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: crow-hq/llm-wiki-v2
+          ref: ${{ env.UPSTREAM_REF }}
+          path: upstream
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upstream image (unmodified upstream Dockerfile)
+        uses: docker/build-push-action@v6
+        with:
+          context: upstream
+          push: true
+          platforms: linux/amd64
+          labels: org.opencontainers.image.source=https://github.com/onepush-dev/llm-wiki-v2
+          tags: ghcr.io/onepush-dev/llm-wiki-v2-base:${{ env.TAG }}
+      - uses: docker/build-push-action@v6
+        with:
+          context: app
+          push: true
+          platforms: linux/amd64
+          tags: ghcr.io/onepush-dev/llm-wiki-v2:${{ env.TAG }}
