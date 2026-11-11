@@ -9,7 +9,7 @@ permissions:
   packages: write
 env:
   UPSTREAM_REF: v1.0.0
-  TAG: 1.0.0
+  TAG: 1.0.0-r2
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -33,7 +33,7 @@ jobs:
           push: true
           platforms: linux/amd64
           labels: org.opencontainers.image.source=https://github.com/onepush-dev/llm-wiki-v2
-          tags: ghcr.io/onepush-dev/llm-wiki-v2-base:${{ env.TAG }}
+          tags: ghcr.io/onepush-dev/llm-wiki-v2-base:1.0.0
       - uses: docker/build-push-action@v6
         with:
           context: app

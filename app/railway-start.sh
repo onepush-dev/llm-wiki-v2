@@ -25,13 +25,15 @@ cat > /tmp/Caddyfile <<'CADDY'
 		}
 		# The wiki only answers requests addressed to localhost and refuses cross-site writes.
 		# Authenticated same-origin requests are presented as local (so Settings can be edited from the page);
-		# any other Origin is passed through unchanged and the wiki refuses it.
+		# any other Origin is passed through unchanged and the wiki refuses it. X-Forwarded-For is dropped because
+		# uvicorn would otherwise report the visitor's address instead of the proxy's loopback one.
 		@same expression {header.Origin} == "https://" + {host} || {header.Origin} == "http://" + {host}
 		handle @same {
 			reverse_proxy 127.0.0.1:8000 {
 				header_up Host localhost:8000
 				header_up Origin http://localhost:8000
 				header_up X-Author {http.auth.user.id}
+				header_up -X-Forwarded-For
 				flush_interval -1
 			}
 		}
@@ -39,6 +41,7 @@ cat > /tmp/Caddyfile <<'CADDY'
 			reverse_proxy 127.0.0.1:8000 {
 				header_up Host localhost:8000
 				header_up X-Author {http.auth.user.id}
+				header_up -X-Forwarded-For
 				flush_interval -1
 			}
 		}

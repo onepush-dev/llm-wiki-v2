@@ -19,4 +19,4 @@ Community packaging of upstream `v1.0.0` (image built unmodified from the upstre
 The MCP memory (`/mcp`) can be turned on from the page; MCP clients must send the same basic-auth credentials (`Authorization: Basic ...`).
 
 ## Layout
-- `app/Dockerfile` adds Caddy and the start script on top of the upstream image; `.github/workflows/publish-ghcr.yml` builds `ghcr.io/onepush-dev/llm-wiki-v2:1.0.0`.
+- `app/Dockerfile` adds Caddy and the start script on top of the upstream image; `.github/workflows/publish-ghcr.yml` builds `ghcr.io/onepush-dev/llm-wiki-v2:1.0.0-r2`.
