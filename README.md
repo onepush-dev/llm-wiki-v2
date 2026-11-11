@@ -2,7 +2,7 @@
 
 [llm-wiki-v2](https://github.com/crow-hq/llm-wiki-v2) (AGPL-3.0) turns the sources you drop in into a Markdown wiki that an LLM keeps organised, and answers questions with citations. It works with OpenRouter, OpenAI, Gemini or any OpenAI-compatible server. Deploy it on Railway with one click.
 
-[![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/new/template?template=https://github.com/onepush-dev/llm-wiki-v2)
+[![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/deploy/vknEJG)
 
 Community packaging of upstream `v1.0.0` (image built unmodified from the upstream Dockerfile); not affiliated with the upstream authors.
 
